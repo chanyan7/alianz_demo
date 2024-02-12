@@ -8,6 +8,7 @@ This function is to generate the mock data of sales in a CSV where
     file_path = the path where csv stores (editable)
 """
 
+
 #define the size of data
 max_register = 200; 
 max_quantity = 100;
