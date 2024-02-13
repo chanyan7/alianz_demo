@@ -10,16 +10,17 @@ This function is to generate the mock data of sales in a CSV where
 
 
 #define the size of data
-max_register = 200; 
+max_register = 20000; 
 max_quantity = 100;
-start_date = datetime(1980, 2, 9, 9, 10, 0)
+start_date = datetime(1990, 2, 9, 9, 10, 0)
+last_id = 40000
 
 # Specify the path where you want to save the CSV file
 file_path = 'C:/Users/david/allianz_demo/mock data/part1_mock_data.csv'
 
 
 #list of transactions, generating the data sequencially  
-transactions_list = list(range(1, max_register+1)) 
+transactions_list = list(range(last_id+1,  last_id + max_register+1)) 
 #list of customers, could be duplicated
 customers_list = np.random.randint(1, max_register *100 , size = max_register)
 

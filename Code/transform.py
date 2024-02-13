@@ -40,7 +40,7 @@ def transform_data(df: pd.DataFrame, last_timestamp):
     
     #convertion of data type 
     df['transaction_id'] = df['transaction_id'].astype('int')
-    df['customer_id'] = df['customer_id'].astype('int')
+    df['customer_id'] = df['customer_id'].astype('string').apply(partial_mask_cc) #str(df['customer_id'][0]) +  'X' * 3 + str(df['customer_id'][-2:])
     df['product_id'] = df['product_id'].astype('int')
     df['quantity'] = df['quantity'].astype('int')
     df['timestamp'] = df['timestamp'].dt.date
@@ -49,6 +49,14 @@ def transform_data(df: pd.DataFrame, last_timestamp):
     df= df.rename(columns={'timestamp': 'sale_date'})
 
     return df, dropped_data
+
+# Define a function to partially mask credit card numbers
+def partial_mask_cc(cc_number):
+    # Replace all but the last four digits with 'X'
+    masked_cc_number = str(cc_number[:1]) + 'X' *3 + str(cc_number[-2:])
+    return masked_cc_number
+
+
 
 #transform_data(pd.read_csv('C:/Users/david/allianz_demo/mock data/part1_mock_data.csv'),pd.Timestamp('1969-01-01 08:30:00'))
 
