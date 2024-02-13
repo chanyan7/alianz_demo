@@ -10,7 +10,8 @@ def transform_data(df: pd.DataFrame, last_timestamp):
         last_timestamp: last ejecution of ETL process
     
     returns:
-        df (DataFrame): pandas dataframe to be loaded in SQL database
+        df (DataFrame): cleaned data to be loaded in SQL database
+        drop_data(DataFrame): dropped data due to data problems 
     """
     
     df['timestamp'] = pd.to_datetime(df['timestamp'])
@@ -19,13 +20,13 @@ def transform_data(df: pd.DataFrame, last_timestamp):
     # Check the duplication in primary key
     
     #drop duplicates
-    dropped_rows_df =  df[df.duplicated(keep=False)]
-    df.drop_duplicates()
+    #dropped_rows_df =  df[df.duplicated(keep=False)]
+    df = df.drop_duplicates()
     warning_msg = 'Tranform process: there are duplicated values'
 
-    #drop nul values
+    #drop null values
     null_values_df = df[df.isnull().any(axis=1)]
-    df.dropna()
+    df = df.dropna()
     warning_msg = 'Transform process: there are null values'
 
     # check for negative values
@@ -33,11 +34,23 @@ def transform_data(df: pd.DataFrame, last_timestamp):
     df = df[df['quantity'] > 0]
     warning_msg = 'Transform process: there are negative quantity'
 
-    print(dropped_rows_df)
+    #concatenate the wrong data in 1 dataframe
+    dropped_data = pd.concat([null_values_df,negative_quant], axis=1)
+    #print(df)
     
-    return 1
+    #convertion of data type 
+    df['transaction_id'] = df['transaction_id'].astype('int')
+    df['customer_id'] = df['customer_id'].astype('int')
+    df['product_id'] = df['product_id'].astype('int')
+    df['quantity'] = df['quantity'].astype('int')
+    df['timestamp'] = df['timestamp'].dt.date
 
-transform_data(pd.read_csv('C:/Users/david/allianz_demo/mock data/part1_mock_data.csv'),pd.Timestamp('1969-01-01 08:30:00'))
+    #rename columne
+    df= df.rename(columns={'timestamp': 'sale_date'})
+
+    return df, dropped_data
+
+#transform_data(pd.read_csv('C:/Users/david/allianz_demo/mock data/part1_mock_data.csv'),pd.Timestamp('1969-01-01 08:30:00'))
 
 
     
