@@ -10,10 +10,10 @@ This function is to generate the mock data of sales in a CSV where
 
 
 #define the size of data
-max_register = 20000; 
+max_register = 2000000; 
 max_quantity = 100;
 start_date = datetime(1990, 2, 9, 9, 10, 0)
-last_id = 40000
+last_id = 0
 
 # Specify the path where you want to save the CSV file
 file_path = 'C:/Users/david/allianz_demo/mock data/part1_mock_data.csv'
@@ -31,8 +31,8 @@ products_list = np.random.randint(1, max_register *100 , size = max_register)
 quantity_list = np.random.randint(1, max_quantity , size = max_register)
 
 #list of sale dates
-end_date = start_date + timedelta(days=max_register/4)
-dates_list = list(pd.date_range(start = start_date, end = end_date, freq="6h"))
+end_date = start_date + timedelta(days=max_register/48)
+dates_list = list(pd.date_range(start = start_date, end = end_date, freq="30min"))
 dates_list.pop()
 
 #merge all lists into a dataframe

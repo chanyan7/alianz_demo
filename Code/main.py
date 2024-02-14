@@ -41,7 +41,7 @@ def run_pipeline():
 
         # Fetch the result
         last_timestamp  = cursor.fetchone()[0]
-        #last_timestamp = '1969-01-01 08:30:00'
+        #last_timestamp = '1990-01-01 08:30:00'
  
         # extract
         df = extract_from_csv(csv_file_path)
