@@ -1,8 +1,9 @@
 # allianz_demo
 
 It is a demo to develop an ETL pipeline such that extracting dataa from CSV and loading to SQL DB (Postgres)
-  - Carga incremental desde ultima ejecucción
-  - registra logs en tabla logs de BD
-  - guarda los registros errorneos (missing values) en una tabla aparte.
-  - Dato Customer_id esta encriptado
-  - config.ini guarda los parametros: conexion DB (password encriptado), path de CSV...
+  - Read the data from the CSV file developed by python script.
+  - supporting incremental loading to process only new records since the last ETL run
+  - Parameterize the script to allow configuration of database connection details, file paths, and other settings without modifying the code
+  - Store registers with missing values in another table
+  - data encryption techniques to secure sensitive information during storage
+
