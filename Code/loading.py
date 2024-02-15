@@ -47,7 +47,7 @@ def load(cleaned_data: pd.DataFrame, dropped_data: pd.DataFrame, conn, cursor):
 
     # Identify new records to insert
     new_records = cleaned_data[~cleaned_data['transaction_id'].isin(existing_data['transaction_id'])]
-    
+
     # Insert new records into PostgreSQL table
     if not new_records.empty:
         new_records.to_sql(table_name, engine, if_exists='append', index=False, schema=schema)

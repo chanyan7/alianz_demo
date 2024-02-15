@@ -10,9 +10,9 @@ This function is to generate the mock data of sales in a CSV where
 
 
 #define the size of data
-max_register = 2000000; 
+max_register = 20; 
 max_quantity = 100;
-start_date = datetime(1990, 2, 9, 9, 10, 0)
+start_date = datetime(1980, 2, 9, 9, 10, 0)
 last_id = 0
 
 # Specify the path where you want to save the CSV file

@@ -16,7 +16,6 @@ def run_pipeline():
     database = config['database']['database']
     schema = config['database']['schema']
     username = config['database']['user']
-    port = config['database']['port']
     csv_file_path = config['Paths']['csv_file_path']
     table_name = config['Tables']['save_to']           # Define the table name
 
@@ -41,7 +40,7 @@ def run_pipeline():
 
         # Fetch the result
         last_timestamp  = cursor.fetchone()[0]
-        #last_timestamp = '1990-01-01 08:30:00'
+        #last_timestamp = '1969-01-01 08:30:00'
  
         # extract
         df = extract_from_csv(csv_file_path)
@@ -91,7 +90,6 @@ def run_pipeline():
 
 if __name__ == "__main__":
 
-    
     # run pipeline
     run_pipeline()
 
